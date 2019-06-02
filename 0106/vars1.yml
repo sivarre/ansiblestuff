@@ -1,0 +1,16 @@
+---
+- name: To practise variables from documentaion 
+  hosts: ubuntu_servers
+  vars:
+   usr_name: ansiblevars
+   ip_addr:
+    public_ip: Its public ip
+    private_ip: Its private ip
+  tasks:
+   - name: Printing public ip
+     debug:
+      msg: "Variable i getting from {{ip_addr.public_ip}}"
+   - name: Printing Private ip
+     debug:
+      msg: "Variable is getting from {{ip_addr['private_ip']}}"
+   

@@ -1,0 +1,13 @@
+---
+- hosts: all
+  tasks:
+  - name: Print some fact variables
+    debug:
+     msg: "ansible_default_ipv4 address is {{ansible_default_ipv4.address}}"
+     #msg: "Os Belongs to {{ansible_os_family}} family Private IP address is {{ansible_all_ipv4_addresses}} "
+  - name: Print values regarding RAM
+    debug:
+     msg: "Available free ram is {{ansible_memory_mb.real.free}} "
+  - name: To get Python Version
+    debug:
+     msg: "Python version is {{ansible_python_version}}"

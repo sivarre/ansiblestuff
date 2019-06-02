@@ -1,0 +1,26 @@
+---
+- name: Learning loopsi
+  hosts: all
+  tasks:
+   - name: Install ntp package  on Ubuntu
+     apt:
+      name: ntp
+      state: present
+     when: ansible_os_family == "Debian"
+   - name: Install ntp on centos
+     yum:
+      name: ntp      
+      state: present
+     when: ansible_os_family == "RedHat" 
+   - name: Start and enable NTP service in ubuntu
+     service:
+      name: ntp
+      state: started
+      enabled: yes
+     when: ansible_os_family == "Debian"
+   - name: Start and enable NTP service in Centos
+     service:
+      name: ntpd
+      state: started
+      enabled: yes
+     when: ansible_os_family == "RedHat"

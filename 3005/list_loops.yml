@@ -1,0 +1,27 @@
+---
+- name: Learning Loops
+  hosts: all
+  tasks:
+  - name: Install few packages
+    apt:
+     name: "{{item}}"
+     state: present
+    with_items:
+     - ntp
+     - tree
+     - git
+     - wget
+    when: ansible_os_family == "Debian"
+  - name: Install few packages on Centos
+    yum:
+     name: "{{item}}"
+     state: present
+    loop:
+     - ntp
+     - tree
+     - git
+     - wget
+    when: ansible_os_family == "RedHat"
+  - name: Just to print a os name
+    debug:     
+      msg: "Hello {{ansible_os_family}} operating system"

@@ -1,0 +1,47 @@
+---
+- name: Learning conditions
+  hosts: all
+  tasks:
+   - name: Install ntp package  on Ubuntu
+     apt:
+      name: ntp
+      state: present
+     when: ansible_os_family == "Debian"
+   - name: Install ntp on centos
+     yum:
+      name: ntp      
+      state: present
+     when: ansible_os_family == "RedHat" 
+   - name: Start and enable NTP service in ubuntu
+     service:
+      name: ntp
+      state: started
+      enabled: yes
+     when: ansible_os_family == "Debian"
+   - name: Start and enable NTP service in Centos
+     service:
+      name: ntpd
+      state: started
+      enabled: yes
+     when: ansible_os_family == "RedHat"
+   - name: Deploy ntp conf file in Centos
+     copy:
+      src: files/ntp_centos.conf
+      dest: /etc/ntp.conf
+     when: ansible_os_family == "RedHat"
+   - name: Deplyoing in ubuntu servers
+     copy:
+      src: files/ntp_ubuntu.conf
+      dest: /etc/ntp.conf
+   - name: Restart and enable NTP server in Centos
+     service: 
+      name: ntpd
+      state: restarted
+      enabled: yes
+     when: ansible_os_family == "RedHat"
+   - name: Restart and enable NTP server in Ubuntu
+     service:
+      name: ntp
+      state: restarted
+      enabled: yes
+     when: ansible_os_family == "Debian"

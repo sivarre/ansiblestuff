@@ -1,0 +1,8 @@
+---
+- name: Playbook to gather few facts along usage of msg
+  hosts: ubuntu_servers
+  tasks:
+   - name: To gather FQDN and Ansible family
+     debug:
+      msg: "Os family for {{ansible_fqdn}} is {{ansible_os_family}}"
+    

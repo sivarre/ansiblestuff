@@ -1,0 +1,27 @@
+---
+- name: To install mariadb across Ubuntu & RedHat and create user and database 
+  hosts: centos_servers
+  become: yes
+  tasks:
+  - name: To install mariadb on both centos and ubuntu
+    yum:
+     name: mariadb-server
+     state: present
+   # when: ansible_os_family == "RedHat"
+  - name: Start and enable service of mariadb
+    service:
+     name: mariadb
+     state: started
+     enabled: yes
+  - name: Add a user in mysqldb
+    mysql_user:
+     name: indu
+     password: indu@526
+     priv: '*.*:ALL'
+     state: present
+  - name: Add group by name accounts
+    mysql_db:
+     name: "accounts"
+     state: present
+
+

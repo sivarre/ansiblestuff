@@ -1,0 +1,5 @@
+#Variables defined in this file will be accessed by all the groups in the inventory
+pymysqlpython: MySQL-python
+db_user: siva
+db_password: 12345
+db_name: accounts

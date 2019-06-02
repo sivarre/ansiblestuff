@@ -1,0 +1,16 @@
+---
+- name: Show variable priorities
+  hosts: all
+  become: yes
+  #vars:
+  # usr_name: varuser
+  # usr_comment: from inventory
+  tasks:
+  - name: Adding user
+    user:
+     name: "{{usr_name}}"
+     comment: "{{usr_comment}}"
+    register: usr_out
+  - debug:
+     var: usr_out.name
+ 

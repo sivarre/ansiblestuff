@@ -1,0 +1,15 @@
+---
+- name: To verify precedence of variables
+  hosts: all
+  vars:
+   pack_tree: "tree"
+  tasks:
+  - name: To get host name
+    debug:
+     msg: "This is been running on {{ansible_os_family}} with private ip {{ansible_default_ipv4.address}}"
+  - name: To install tree
+    yum: 
+     name: "{{pack_tree}}"
+     state: present
+    when: ansible_os_family == "RedHat"
+     

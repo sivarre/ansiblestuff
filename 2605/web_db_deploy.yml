@@ -1,0 +1,25 @@
+---
+- name: Setup apache2 server on ubuntu machines
+  hosts: ubuntu_servers
+  tasks:
+  - name: Install apache package
+    apt:
+      name: apache2
+      state: present
+  - name: Start and enable apache service
+    service:
+      name: apache2
+      state: started
+      enabled: yes 
+- name: Setup MariaDB server on Centos machines
+  hosts: centos_servers
+  tasks:
+  - name: install maria db server
+    yum:
+      name: mariadb-server
+      state: present
+  - name: start and enable maria db
+    service:
+      name: mariadb
+      state: started
+      enabled: yes
