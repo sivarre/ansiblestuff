@@ -1,0 +1,6 @@
+---
+- hosts: centos_servers
+  tasks:
+  - shell: touch /home/ansible/siva1.txt
+    when: ansible_distribution_file_variety == "RedHat" and ansible_distribution_major_version | int  >= 7  
+#when: ansible_facts['os_family'] == "RedHat" and ansible_facts['lsb']['major_release']|int >= 6

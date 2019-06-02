@@ -1,0 +1,5 @@
+---
+- hosts: ubuntu_servers
+  tasks:
+   - debug:
+      msg: "printing the values of release: {{ ansible_lsb.major_release }}"

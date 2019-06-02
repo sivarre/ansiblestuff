@@ -1,0 +1,7 @@
+--- 
+- hosts: centos_servers
+  tasks:
+  - command: uptime
+    register: result
+  - debug:
+     var: result.end

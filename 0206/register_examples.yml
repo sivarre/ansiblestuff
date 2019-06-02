@@ -1,0 +1,13 @@
+---
+- hosts: centos_servers
+  tasks: 
+  # - name: pwd verify
+   #  shell: cd /opt/
+    # register: opt_output
+   - name: creating a touch file 
+     shell: touch hello.txt
+     register: pwd_output
+     when: pwd_output.stdout_lines == "/home/ansible"
+   - name: Printing above output  
+     debug:
+      var: pwd_output

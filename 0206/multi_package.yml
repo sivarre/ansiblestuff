@@ -1,0 +1,16 @@
+---
+- hosts: ubuntu_servers
+  tasks:
+  - name: To add multiple users
+    user:
+     name: "{{ item }}"
+     comment: Adding "{{ item }}" User
+    register: usr_out
+    loop:
+      - siva
+      - indira
+      - mahadev
+  - name: To print output for above task
+    debug:
+     var: usr_out[results][comment]
+

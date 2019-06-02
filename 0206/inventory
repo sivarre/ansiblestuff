@@ -1,0 +1,14 @@
+node1
+node2
+node3 ansible_python_interpreter='/usr/bin/python3'
+
+[ubuntu_servers]
+node3
+
+[centos_servers]
+node1
+node2
+
+[all_servers:children]
+ubuntu_servers
+centos_servers
