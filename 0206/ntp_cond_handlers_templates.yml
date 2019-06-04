@@ -1,0 +1,53 @@
+---
+- name: Installing and Deploying NTP server on ubuntu and centos
+  hosts: all
+  tasks:
+   - name: Install ntp package  on Ubuntu
+     apt:
+      name: ntp
+      state: present
+     when: ansible_os_family == "Debian"
+   - name: Install ntp package on centos
+     yum:
+      name: ntp      
+      state: present
+     when: ansible_os_family == "RedHat" 
+   - name: Start and enable NTP service in ubuntu
+     service:
+      name: ntp
+      state: started
+      enabled: yes
+     when: ansible_os_family == "Debian"
+   - name: Start and enable NTP service in Centos
+     service:
+      name: ntpd
+      state: started
+      enabled: yes
+     when: ansible_os_family == "RedHat"
+   - name: Deploy ntp conf file in Centos
+     template:
+      src: templates/ntp_centos.j2
+      dest: /etc/ntp.conf
+     when: ansible_os_family == "RedHat"
+     notify: 
+     - Restarting NTP server in Centos
+   - name: Deploy ntp conf file in Ubuntu
+     template:
+      src: templates/ntp_ubuntu.j2
+      dest: /etc/ntp.conf
+     when: ansible_os_family == "Debian"
+     notify: 
+     - Restarting NTP server in Ubuntu
+  handlers:
+   - name: Restarting NTP server in Centos
+     service: 
+      name: ntpd
+      state: restarted
+      enabled: yes
+     when: ansible_os_family == "RedHat"
+   - name: Restarting NTP server in Ubuntu
+     service:
+      name: ntp
+      state: restarted
+      enabled: yes
+     when: ansible_os_family == "Debian"

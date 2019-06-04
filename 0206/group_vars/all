@@ -1,0 +1,4 @@
+ntp_srv0: 0.south-america.pool.ntp.org
+ntp_srv1: 1.south-america.pool.ntp.org
+ntp_srv2: 2.south-america.pool.ntp.org
+ntp_srv3: 3.south-america.pool.ntp.org

@@ -1,0 +1,15 @@
+---
+- hosts: ubuntu_servers
+  tasks:  
+   - name: Adding a user by name phani
+     user:
+      name: phani 
+      comment: Adding user phani to ubuntu machine
+     notify:
+      - Move files to the created user phani
+  handlers: 
+   - name: Move files to the created user phani 
+     copy:
+      src: ansible.cfg 
+      dest: /home/phani/
+

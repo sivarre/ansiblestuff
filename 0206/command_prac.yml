@@ -1,0 +1,8 @@
+---
+- hosts: localhost
+  tasks:
+   - command: mkdir local
+     register: dir_out
+   - debug:
+      var: dir_out
+

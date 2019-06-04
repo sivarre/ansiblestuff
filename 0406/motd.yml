@@ -1,0 +1,25 @@
+---
+- hosts: localhost
+  tasks:
+   - name: return motd to registered var
+     command: cat /opt/indu
+     register: mod_out
+
+   - name: Print mod output
+     debug:
+      var: mod_out.start
+
+   - name: To try command with creats in module
+     command: touch /opt/macbook creates=/opt/macbook
+     register: mac_out
+    
+   - name: Command to see creates along with Args
+     command: touch /opt/create_test
+     args:
+      creates: /opt/create_test
+   
+   - name: Command to see create along with chdir 
+     command: touch chdir_test
+     args:
+      chdir: /opt/
+      creates: /opt/chdir_test     
